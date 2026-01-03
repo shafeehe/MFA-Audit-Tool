@@ -70,10 +70,9 @@ Download the repo as ZIP from GitHub and extract it to:
 
 ---
 This is a learning-driven project — feedback, suggestions, and collaboration are welcome.
----
+
 
 ##👤Author
-
+---
 Mohammed Shafeehe
-
 Cloud / DevOps Engineering Aspirant
