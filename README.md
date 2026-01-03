@@ -47,7 +47,6 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
 
 Run these commands in PowerShell:
 
-```powershell
 cd $env:USERPROFILE\Documents\WindowsPowerShell\Modules
 git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit
 
@@ -58,3 +57,9 @@ git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit
 - Confirm it works: "Get-MFAReport"
 
 PowerShell will also auto-load your MFA-Audit-Module in future sessions.
+
+
+## Option 2 — Manual Install (without Git)
+
+Download the repo as ZIP from GitHub and extract it to:
+"Documents\WindowsPowerShell\Modules\MFAAudit"
