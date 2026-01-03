@@ -16,8 +16,9 @@ This project is part of my Cloud & DevOps learning journey — focused on buildi
   - `Export-Csv`
   - `Format-Table`
   - `Where-Object`
-- Designed with a professional module structure ('.psm1' --> Root File, '.psd1' --> module manifest, '.ps1' --> My Function File)
----
+- Designed with a professional module structure
+   -('.psm1' --> Root File, '.psd1' --> module manifest, '.ps1' --> My Function File)
+----
 
 ## 🧩 Cmdlet Included
 
