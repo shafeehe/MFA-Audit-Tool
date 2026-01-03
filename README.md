@@ -29,6 +29,8 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
  - "Get-MFAReport" --> Returns IAM users and their MFA status.
  - "Get-MFAReport | Export-Csv filename.csv -NoTypeInformation " --> export as csv file
  - "Get-MFAReport | Format-Table -Autosize " --> Auto-adjust the displaying table
+ - "Get-MFAReport | Where-Object { $_.MFA_Status -eq "Disabled" } "  --> search for users with MFA disabled.
+
  - ...
 
 
@@ -41,7 +43,9 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
 
 ---
 
+
 ##  Installation Methods
+
 
 ## Option 1 — Install from GitHub (recommended)
 
@@ -52,12 +56,12 @@ Run these commands in PowerShell:
 
 ---
 
-
 - Then import the module: "Import-Module MFAAudit"
 - Confirm it works: "Get-MFAReport"
 
 PowerShell will also auto-load your MFA-Audit-Module in future sessions.
 
+---
 
 ## Option 2 — Manual Install (without Git)
 
@@ -66,7 +70,7 @@ Download the repo as ZIP from GitHub and extract it to:
 
 ---
 This is a learning-driven project — feedback, suggestions, and collaboration are welcome.
-
+---
 
 ##👤Author
 
