@@ -31,5 +31,27 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
  - "Get-MFAReport | Format-Table -Autosize " --> Auto-adjust the displaying table
  - ...
 
-Example output:
 
+
+##  Prerequisites
+
+- Windows PowerShell / PowerShell 7
+- AWS PowerShell Tools (`AWS.Tools.IAM`)
+- AWS credentials configured (`aws configure` or `Set-AWSCredential`)
+
+---
+
+##  Installation Methods
+
+## Option 1 — Install from GitHub (recommended)
+
+Run these commands in PowerShell:
+
+```powershell
+cd $env:USERPROFILE\Documents\WindowsPowerShell\Modules
+git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit
+
+- Then import the module: "Import-Module MFAAudit"
+- Confirm it works: "Get-MFAReport"
+
+PowerShell will also auto-load your MFA-Audit-Module in future sessions.
