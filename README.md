@@ -51,7 +51,8 @@ Run these commands in PowerShell:
 cd $env:USERPROFILE\Documents\WindowsPowerShell\Modules
 git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit
 
-```powershell
+---
+
 
 - Then import the module: "Import-Module MFAAudit"
 - Confirm it works: "Get-MFAReport"
