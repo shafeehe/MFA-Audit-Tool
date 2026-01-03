@@ -47,8 +47,8 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
 
 Run these commands in PowerShell:
 
-cd $env:USERPROFILE\Documents\WindowsPowerShell\Modules
-git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit
+- "cd $env:USERPROFILE\Documents\WindowsPowerShell\Modules"
+- "git clone https://github.com/<your-username>/MFA-Audit-Tool.git MFAAudit"
 
 ---
 
