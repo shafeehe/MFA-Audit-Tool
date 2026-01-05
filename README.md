@@ -43,7 +43,12 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
 
 ---
 
+
 ## ⚠️Note ⚠️ ##
+
+*This tool is designed to run with IAM roles like "SecurityAudit"
+and should not be executed using Administrator or Root credentials.*
+
 -Your AWS account *MUST* have atleast the minimum required *PERMISSIONS* to run this tool:
 
   -iam:ListUsers.
@@ -53,7 +58,8 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
   -iam:ListAccessKeys.
   
   -iam:GenerateCredentialReport.
-  
+
+
 ---
 
 ##  Installation Methods
