@@ -83,12 +83,12 @@ PowerShell will also auto-load your MFA-Audit-Module in future sessions.
 
 ## Option 2 — Manual Install (without Git)
 
-Download the repo as ZIP from GitHub and extract it to:
+-Download the repo as ZIP from GitHub and extract it to:
 "Documents\WindowsPowerShell\Modules\MFAAudit"
 
 ---
 This is a learning-driven project — feedback, suggestions, and collaboration are welcome.
-
+---
 
 ##👤Author
 ---
