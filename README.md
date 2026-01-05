@@ -44,7 +44,7 @@ The function is built and well tested on the PowerShell ISE and stay tuned for t
 ---
 
 ## ⚠️Note ⚠️ ##
--Your AWS account *MUST* have atleast the minimum required configurations to run this tool:
+-Your AWS account *MUST* have atleast the minimum required *PERMISSIONS* to run this tool:
 
   -iam:ListUsers.
   
