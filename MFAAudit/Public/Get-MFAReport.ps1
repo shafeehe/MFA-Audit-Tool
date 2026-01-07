@@ -38,7 +38,12 @@ catch {
       }
 
 function Get-MFAReport {
+    
+    [CmdletBinding()]
+    param() 
+
     $iamUsers = Get-IAMUserList
+
     foreach ($user in $iamUsers) {
         $mfaDevices = Get-IAMMFADevice -UserName $user.UserName
         $mfaStatus  = if ($mfaDevices.Count -gt 0) { "Enabled" } else { "Disabled" }
