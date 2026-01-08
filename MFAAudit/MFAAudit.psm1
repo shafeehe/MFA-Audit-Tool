@@ -1,4 +1,7 @@
-$Public = Join-Path $PSScriptRoot "Public\*.ps1"
-Get-ChildItem $Public | ForEach-Object { . $_ }
+# Load public functions
 
-Export-ModuleMember -Function Get-MFAReport
+Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -Recurse |
+ForEach-Object {. $_}
+
+# Export functions
+Export-ModuleMember -Function *
