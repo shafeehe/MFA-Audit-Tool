@@ -1,9 +1,42 @@
-﻿#Function to identify the inactive users who have not been active for the last 90 days
+﻿<#
+.SYNOPSIS
+Identifies AWS IAM users who have inactive for a specified number of days.
 
+.DESCRIPTION
+This cmdlet analyzes AWS IAM credential report data to determine the most recent
+activity for each IAM user (console password usage or access key usage).
+
+The cmdlet returns structured objects that can be filtered, sorted,
+or exported using standard PowerShell pipelines.
+
+.PARAMETER Days
+Number of days since the user's last activity.
+Default is 90 days.
+
+.EXAMPLE
+Get-InactiveIAMUsers -->  Returns all IAM users and their activity status using the default 90-day threshold.
+
+.EXAMPLE
+Get-InactiveIAMUsers -Days 120 -->   Check IAM Users inactive for more than 120 days.
+
+.EXAMPLE
+Get-InactiveIAMUsers | Where-Object Status -eq "Inactive" --> returns only the inactive users.
+
+.EXAMPLE
+Get-InactiveIAMUsers | Export-Csv filename.csv -NoTypeInformation --> exports the report as a csv file.
+
+.NOTES
+
+Author: Mohammed Shafeehe
+Module: MFAAudit
+Requires: AWS.Tools.IdentityManagement
+#>
 function Get-InactiveIAMUsers {
     [CmdletBinding()]
     param(
-         [int]$Days = 90
+         [int]$Days = 90,
+
+         [switch]$OnlyInactive
     )
     
     $threshold = (Get-Date).AddDays(-$Days) 
@@ -30,6 +63,9 @@ function Get-InactiveIAMUsers {
     $rows = $report -split "`n" | ConvertFrom-Csv
 
 
+    $TotalUsers = 0
+    $ActiveUsers = 0
+    $InactiveUsers = 0
 
     foreach ($r in $rows) {
         $user = $r.user
@@ -43,7 +79,11 @@ function Get-InactiveIAMUsers {
         $LastActivity = if($candidates) { ($candidates | Sort-Object -Descending)[0] } 
                         else { $null }
         $inactive = ($LastActivity -eq $null) -or ($LastActivity -lt $threshold)
+        if ($OnlyInactive -and -not $inactive) { continue }
 
+        $TotalUsers ++
+        if ($inactive) { $InactiveUsers++ }
+        else { $ActiveUsers++ }
 
 
         $status = if($inactive) {"Inactive"} else {"Active"}
@@ -52,10 +92,21 @@ function Get-InactiveIAMUsers {
 
      
         [PSCustomObject]@{
+            RecordType = 'IAM User'
             UserName = $user
             LastActivity = $LastActivity
             Status = $status 
             DaysInactive = $DaysInactive
         }
+
+
+        
     }
+
+    [PSCustomObject]@{
+            RecordType = 'Summary'
+            TotalUsers = $TotalUsers
+            ActiveUsers = $ActiveUsers
+            InactiveUsers = $InactiveUsers
+        }
 }
