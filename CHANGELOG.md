@@ -2,11 +2,11 @@
 
 All notable changes to the MFAAudit project will be documented in this file.
 
-This project follows an iterative development approach — features are added gradually with focus on learning, security awareness, and practical DevOps tooling.
+This project follows an iterative development approach ï¿½ features are added gradually with focus on learning, security awareness, and practical DevOps tooling.
 
 ---
 
-## v1.1.0 — GuardRail & Module Improvements (2026-01-05)
+## v1.1.0 ï¿½ GuardRail & Module Improvements (2026-01-05)
 
 ### Added
 - Implemented **GuardRail AWS Account Confirmation** before running audits
@@ -27,7 +27,7 @@ This project follows an iterative development approach — features are added grad
 
 ---
 
-## v1.0.0 — Initial Release (Foundation Build)
+## v1.0.0 ï¿½ Initial Release (Foundation Build)
 
 ### Added
 - Created **MFAAudit PowerShell Module**
@@ -44,4 +44,10 @@ This project follows an iterative development approach — features are added grad
   - AWS IAM inspection
   - IAM user + MFA fundamentals
   - Tool-building instead of ad-hoc scripting
+
+-----------------------------------------------------------------------
+## v1.2.0 â€” Inactive IAM Users Detection
+- Added Get-InactiveIAMUsers cmdlet to identify IAM users inactive for configurable number of days
+- Integrated cmdlet into MFAAudit module with proper autoload behavior
+- Improved module structure and exports
 
