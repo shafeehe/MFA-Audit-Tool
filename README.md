@@ -1,45 +1,85 @@
-# AWS IAM MFA Audit PowerShell Module
+# AWS IAM Security Audit PowerShell Module
 
+AWS IAM Security Audit Tool is a professionally structured PowerShell module designed to audit AWS IAM security posture using read-only AWS APIs.
 
-A PowerShell module that audits IAM users in an AWS account and reports whether MFA is enabled or disabled for each user.
+This is an installable PowerShell module that provides 'cmdlets' to audit IAM users and root users MFA compliance, analyse users-activity and detect inactive users along with credential analysis and collect overall security audit report in your AWS account.This project is actively developed with version control and documentation maintained in GitHub.
 
 This project is part of my Cloud & DevOps learning journey — focused on building real automation tools instead of standalone scripts. The tool is structured as a reusable PowerShell module, similar to how enterprise automation tools are packaged and deployed.
 
-The function is built and well tested on the PowerShell ISE and stay tuned for the further upgrades!
+The function is built, debugged and tested on the PowerShell ISE. Stay tuned for the latest releases and upgrades!
 
 ---
 
-## Features
+## Key Features✅
 
-- Lists all IAM users in an AWS account
-- Checks whether MFA is enabled for each user
-- Outputs structured objects (PowerShell-native format)
-- Export the report to convenient formats such as .csv and .html .
-- Supports piping ( '|') to tools like:
-  - `Export-Csv`
-  - `Format-Table`
-  - `Where-Object`
-- Designed with a professional module structure:
+
+-1️⃣IAM MFA Compliance Audit:
+
+  -List IAM Users and identify each IAM user with MFA enabled or disabled in your AWS Account.
+  
+  -Export the report to convenient formats such as .csv or .html .
+
+-2️⃣Inactive IAM User Detection with Summary Statistics:
+
+  -List all IAM Users and then detect IAM users with no console or access key activity beyond a configurable threshold(default: 90 days), ie: inactive users. 
+  -Generate summary statistics: get the aggregrate count of total, inactive and active users in  your AWS Account. (Summary objects is for Report generation & "Group-Object" is for analytics & computing)
+  
+  -Export the report to convenient formats such as *.csv*/ *.html*/ *.json* .
+
+  -Uses AWS IAM Credential Report.
+
+  -Supports filtering inactive users only using switches ( " ...... -OnlyInactive " )
+
+## Common Features✅: 
+
+- Safety Guardrails:
+  -AWS account confirmation before audit execution & prevents accidental execution against unintended accounts.
+
+- "Get-Help" Self Documentation Guide.
+  
+- Object-based output suitable for filtering and export:
+  -Outputs structured audit data (using "[PSCustomObject]@ {}...") rather than just printing the output.
+
+- Supports pipe-lines( '|') to tools such as:
+  - `Export-Csv`....
+  - `Format-Table`...
+  - `Where-Object` / 'Sort-Object' .....
+    
+- Designed with a professional PowerShell module structure:
   - '.psm1' --> Root File, '.psd1' --> module manifest, '.ps1' --> My Function File
   
 ----
 
-## 🧩 Cmdlet Included
+## 🧩 Cmdlet Examples
 
- - "Get-MFAReport" --> Returns IAM users and their MFA status.
- - "Get-MFAReport | Export-Csv filename.csv -NoTypeInformation " --> export as csv file
- - "Get-MFAReport | Format-Table -Autosize " --> Auto-adjust the displaying table
- - "Get-MFAReport | Where-Object { $_.MFA_Status -eq "Disabled" } "  --> search for users with MFA disabled.
+-1️⃣IAM MFA Compliance Audit:
 
- - ...
+  - Get-MFAReport                                                     --> returns IAM users and their MFA status.
+  - Get-MFAReport | Export-Csv filename.csv -NoTypeInformation        --> export as csv file
+  - Get-MFAReport | Format-Table -Autosize                            --> auto-adjust the displaying table
+  - Get-MFAReport | Where-Object { $_.MFA_Status -eq "Disabled" }     --> search for users with MFA disabled.
+  - .....
+
+-2️⃣Inactive IAM User Detection with Summary Statistics:
+
+  - Get-InactiveIAMUsers                                               --> returns IAM user activity and summary count of users
+  - Get-InactiveIAMUsers -Days 120                                     --> returns users that are inactive for last 120 days (you sets the threshold days)
+  - Get-InactiveIAMUsers -OnlyInactive                                 --> lists inactive users only (switch parameter )
+  - Get-InactiveIAMUsers | Export-Csv filename.csv -NoTypeInformation  --> exports as csv file
+  - Get-InactiveIAMUsers | Select-Object UserName, DaysInactive        --> get the days inactive for a specific user
+  - .....
+
+-Exporting syntaxes:
+  "....... |Export-Csv" , "........ |ConvertTo-Html", "......... |ConvertTo-Json", "........ |Export-Clixml"
 
 
+   
 
 ##  Prerequisites
 
 - Windows PowerShell / PowerShell 7
 - AWS PowerShell Tools (`AWS.Tools.IAM`)
-- AWS credentials configured (`aws configure` or `Set-AWSCredential`)
+- AWS credentials configured for your AWS Account(`aws configure` or `Set-AWSCredential`)
 
 ---
 
