@@ -53,6 +53,12 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
   
 ----
 
+## Basic Architecture
+
+<img width="768" height="431" alt="image" src="https://github.com/user-attachments/assets/de42d858-1df8-4105-8b94-a322da16f773" />
+
+
+----
 ## 🧩 Cmdlet Examples
 
 -1️⃣IAM MFA Compliance Audit:
