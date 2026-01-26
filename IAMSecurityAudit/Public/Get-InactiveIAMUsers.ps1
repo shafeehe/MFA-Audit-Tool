@@ -36,7 +36,8 @@ function Get-InactiveIAMUsers {
     param(
          [int]$Days = 90,
 
-         [switch]$OnlyInactive
+         [switch]$OnlyInactive,
+	 [switch]$IncludeSummary
     )
     
     $threshold = (Get-Date).AddDays(-$Days) 
@@ -67,6 +68,8 @@ function Get-InactiveIAMUsers {
     $ActiveUsers = 0
     $InactiveUsers = 0
 
+    $UserResults = @()
+
     foreach ($r in $rows) {
         $user = $r.user
         if (-not $user -or $user -eq "<root_account>") { continue }
@@ -79,23 +82,26 @@ function Get-InactiveIAMUsers {
         $LastActivity = if($candidates) { ($candidates | Sort-Object -Descending)[0] } 
                         else { $null }
         $inactive = ($LastActivity -eq $null) -or ($LastActivity -lt $threshold)
-        if ($OnlyInactive -and -not $inactive) { continue }
+        
 
         $TotalUsers ++
         if ($inactive) { $InactiveUsers++ }
         else { $ActiveUsers++ }
 
+	if ($OnlyInactive -and -not $inactive) { continue }
 
-        $status = if($inactive) {"Inactive"} else {"Active"}
+
+        
         $DaysInactive = if ($LastActivity) { [int]((Get-Date) - $LastActivity).TotalDays }
                         else { $null }
 
      
-        [PSCustomObject]@{
-            RecordType = 'IAM User'
+        $UserResults += [PSCustomObject]@{
+  	    PSTypeName = 'IAMSecurityAudit.InactiveUser'
             UserName = $user
-            LastActivity = $LastActivity
-            Status = $status 
+            Inactive = $inactive   #-->Boolean out for machine, hidden when o/p is displayed
+            Status = if ($inactive) {'Inactive'} else {'Active'}   #-->Human friendly out
+	    LastActivity = $LastActivity
             DaysInactive = $DaysInactive
         }
 
@@ -103,10 +109,18 @@ function Get-InactiveIAMUsers {
         
     }
 
-    [PSCustomObject]@{
-            RecordType = 'Summary'
-            TotalUsers = $TotalUsers
-            ActiveUsers = $ActiveUsers
-            InactiveUsers = $InactiveUsers
-        }
+    if ($IncludeSummary) { 
+
+	$UserResults
+
+	Write-Host ""
+    	Write-Host "===== SUMMARY ====="
+   	Write-Host "Total Users   : $TotalUsers"
+    	Write-Host "Active Users  : $ActiveUsers"
+    	Write-Host "Inactive Users: $InactiveUsers"
+	Write-Host ""
+    }
+    else { $UserResults }	
+
+			
 }
