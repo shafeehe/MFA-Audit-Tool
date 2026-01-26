@@ -30,10 +30,13 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
 
   -Supports filtering inactive users only using switches ( " ...... -OnlyInactive " )
 
-## Common Features✅: 
+## Other Features✅: 
 
 - Safety Guardrails:
   -AWS account confirmation before audit execution & prevents accidental execution against unintended accounts.
+
+- Fully Automation Compatible Output(objects):
+  -The script ( .ps1) is machine-safe(Boolean) and Human-readable(strings) and therefore automation and pipeline friendly
 
 - "Get-Help" Self Documentation Guide.
   
@@ -50,6 +53,12 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
   
 ----
 
+## Basic Architecture
+
+<img width="768" height="431" alt="image" src="https://github.com/user-attachments/assets/de42d858-1df8-4105-8b94-a322da16f773" />
+
+
+----
 ## 🧩 Cmdlet Examples
 
 -1️⃣IAM MFA Compliance Audit:
@@ -65,9 +74,9 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
   - Get-InactiveIAMUsers                                               --> returns IAM user activity and summary count of users
   - Get-InactiveIAMUsers -Days 120                                     --> returns users that are inactive for last 120 days (you sets the threshold days)
   - Get-InactiveIAMUsers -OnlyInactive                                 --> lists inactive users only (switch parameter )
+  - Get-InactiveIAMUsers -IncludeSummary                               --> include summary counts of users
   - Get-InactiveIAMUsers | Export-Csv filename.csv -NoTypeInformation  --> exports as csv file
-  - Get-InactiveIAMUsers | Select-Object UserName, DaysInactive        --> get the days inactive for a specific user
-  - .....
+  
 
 -Exporting syntaxes:
   "....... |Export-Csv" , "........ |ConvertTo-Html", "......... |ConvertTo-Json", "........ |Export-Clixml"
