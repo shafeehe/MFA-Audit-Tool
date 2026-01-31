@@ -1,4 +1,27 @@
-﻿function Get-RootAccountSecurity  {
+﻿
+
+<#
+.SYNOPSIS
+Audit the AWS root account security status.
+
+.DESCRIPTION
+This cmdlet returns the security audit result and assess the risk level for the AWS root account
+ (MFA compliance, active Access-Keys, last console login).
+
+The cmdlet returns structured objects that can be filtered, sorted,
+or exported using standard PowerShell pipelines.
+
+.PARAMETER 
+
+.EXAMPLE
+Get-RootAccountSecurity 
+
+.NOTES
+Author: Mohammed Shafeehe
+Module: MFAAudit
+Requires: AWS.Tools.IdentityManagement
+#>
+function Get-RootAccountSecurity  {
     [CmdletBinding() ]
     param() 
 
