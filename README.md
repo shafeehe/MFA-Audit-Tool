@@ -75,8 +75,19 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
   - Get-InactiveIAMUsers -Days 120                                     --> returns users that are inactive for last 120 days (you sets the threshold days)
   - Get-InactiveIAMUsers -OnlyInactive                                 --> lists inactive users only (switch parameter )
   - Get-InactiveIAMUsers -IncludeSummary                               --> include summary counts of users
-  - Get-InactiveIAMUsers | Export-Csv filename.csv -NoTypeInformation  --> exports as csv file
-  
+
+-3️⃣ Detect Access-Keys that violate AWS Key-Rotation Policies:
+
+  - Get-AccessKeyAgeReport
+  - Get-AccessKeyAgeReport | -OnlyOld
+  -
+
+-4️⃣ AWS Root Account Security Audit Report:
+
+  - Get-RootAccountSecurity
+
+------------------------------------------------------------
+
 
 -Exporting syntaxes:
   "....... |Export-Csv" , "........ |ConvertTo-Html", "......... |ConvertTo-Json", "........ |Export-Clixml"
