@@ -1,47 +1,102 @@
 # AWS IAM Security Audit PowerShell Module
+---------------------------------------------------
 
-AWS IAM Security Audit Tool is a professionally structured PowerShell module designed to audit AWS IAM security posture using read-only AWS APIs.
+- AWS IAM Security Audit Tool is a professionally structured PowerShell module designed to audit AWS IAM security posture using read-only AWS APIs.
 
-This is an installable PowerShell module that provides 'cmdlets' to audit IAM users and root users MFA compliance, analyse users-activity and detect inactive users along with credential analysis and collect overall security audit report in your AWS account.This project is actively developed with version control and documentation maintained in GitHub.
+- This is an installable PowerShell module that provides 'cmdlets' to audit IAM users and root users MFA compliance, analyse users-activity and detect inactive users along with credential analysis and collect overall security audit report in your AWS account.This project is actively developed with version control and documentation maintained in GitHub.
 
-This project is part of my Cloud & DevOps learning journey — focused on building real automation tools instead of standalone scripts. The tool is structured as a reusable PowerShell module, similar to how enterprise automation tools are packaged and deployed.
+- This project is part of my Cloud & DevOps learning journey — focused on building real automation tools instead of standalone scripts. The tool is structured as a reusable PowerShell module, similar to how enterprise automation tools are packaged and deployed.
 
-The function is built, debugged and tested on the PowerShell ISE. Stay tuned for the latest releases and upgrades!
+- The function is built, debugged and tested on the PowerShell ISE. Stay tuned for the latest releases and upgrades!
 
----
+______________________________________________________________________________________________________
 
-## Key Features✅
+> ## Key Features✅
 
 
--1️⃣IAM MFA Compliance Audit:
+1️⃣IAM MFA Compliance Audit:
+---------------------------------
+  - ✅Cmdlet: Get-InactiveIAMUsers
 
-  -List IAM Users and identify each IAM user with MFA enabled or disabled in your AWS Account.
+<img width="1040" height="65" alt="image" src="https://github.com/user-attachments/assets/b799e8b2-fba6-46fc-be73-f6d250eceed8" />
+
+
+  - List IAM Users and identify each IAM user with MFA enabled or disabled in your AWS Account.
+    
+  - Root Account MFA is excluded (security best practice).
+
+  - Uses AWS IAM Credential Report.
   
-  -Export the report to convenient formats such as .csv or .html .
+  ------------------------------------------------------------------------------
 
--2️⃣Inactive IAM User Detection with Summary Statistics:
+2️⃣Inactive IAM User Detection with Summary Statistics:
+---------------------------------------------------------
+  - ✅Cmdlet: Get-InactiveIAMUsers
 
-  -List all IAM Users and then detect IAM users with no console or access key activity beyond a configurable threshold(default: 90 days), ie: inactive users. 
-  -Generate summary statistics: get the aggregrate count of total, inactive and active users in  your AWS Account. (Summary objects is for Report generation & "Group-Object" is for analytics & computing)
+<img width="913" height="43" alt="image" src="https://github.com/user-attachments/assets/bc7a06b0-90f5-498e-ad6d-9dab7c6fc10c" />
+
   
-  -Export the report to convenient formats such as *.csv*/ *.html*/ *.json* .
+  - List all IAM Users and then detect IAM users with no console or access key activity beyond a configurable threshold(default: 90 days), ie: inactive users.
 
-  -Uses AWS IAM Credential Report.
+  - Set custom days threshold for identifying inactive users ( default: 90days).
+  
+  - Generate summary statistics: get the aggregrate count of total, inactive and active users in  your AWS Account. (Summary objects is for Report generation & "Group-Object" is for analytics & computing)
 
-  -Supports filtering inactive users only using switches ( " ...... -OnlyInactive " )
+  - Supports filtering inactive users only using switches ( " ...... -OnlyInactive " ).
 
-## Other Features✅: 
+  - Uses AWS IAM Credential Report.
+  ------------------------------------------------------------------------------
+
+3️⃣ Detect Access-Keys that violate AWS Key-Rotation Policies: 
+-----------------------------------------------------------------
+  -✅Cmdlet: Get-AccessKeyAgeReport
+
+<img width="730" height="49" alt="image" src="https://github.com/user-attachments/assets/b448c3bd-c671-4f33-86b7-b7d9bc5dcad1" />
+
+  
+  - Lists the active Access-Keys of IAM users and identifies which violates the AWS recommended Key-Rotation Policies, thus enforcing security best practices.
+   
+  - Tells us how long since the keys was rotated.
+
+  - Uses AWS IAM Credential Report.
+  ------------------------------------------------------------------------------
+
+4️⃣ AWS Root Account Security Audit Report:
+-------------------------------------------------------
+  -✅Cmdlet: Get-AccessKeyAgeReport
+
+<img width="877" height="55" alt="image" src="https://github.com/user-attachments/assets/75b074c6-eb88-4c8d-b0fb-a41f1eca5f2e" />
+
+  
+  >> Use the root account only for tasks that require it, and only when absolutely necessary.
+  
+  - Audits the AWS Root Account for critical security risks using the IAM-Credentials-Report
+
+  - Checks performed:
+    - Root MFA status
+    - Presence of active root access keys
+    - Recent root console login activity
+    - Overall root account risk classification
+  - Risk levels returned:
+    - LOW – No security issues detected
+    - HIGH – Risky root usage detected (e.g., recent console login)
+    - CRITICAL – Severe misconfiguration (e.g., MFA disabled or active access keys)
+   
+_________________________________________________________________
+> ## Other Features✅: 
 
 - Safety Guardrails:
-  -AWS account confirmation before audit execution & prevents accidental execution against unintended accounts.
+  - AWS account confirmation before audit execution & prevents accidental execution against unintended accounts.
 
 - Fully Automation Compatible Output(objects):
-  -The script ( .ps1) is machine-safe(Boolean) and Human-readable(strings) and therefore automation and pipeline friendly
+  - The script ( .ps1) is machine-safe(Boolean) and Human-readable(strings) and therefore automation and pipeline friendly
 
 - "Get-Help" Self Documentation Guide.
   
 - Object-based output suitable for filtering and export:
-  -Outputs structured audit data (using "[PSCustomObject]@ {}...") rather than just printing the output.
+  - Outputs structured audit data (using "[PSCustomObject]@ {}...") rather than just printing the output.
+ 
+- Export the report to convenient formats such as *.csv*/ *.html*/ *.json* ...
 
 - Supports pipe-lines( '|') to tools such as:
   - `Export-Csv`....
@@ -53,13 +108,13 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
   
 ----
 
-## Basic Architecture
+> ## Basic Architecture
 
 <img width="768" height="431" alt="image" src="https://github.com/user-attachments/assets/de42d858-1df8-4105-8b94-a322da16f773" />
 
 
 ----
-## 🧩 Cmdlet Examples
+> ## 🧩 Cmdlet Examples
 
 -1️⃣IAM MFA Compliance Audit:
 
@@ -72,7 +127,7 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
 -2️⃣Inactive IAM User Detection with Summary Statistics:
 
   - Get-InactiveIAMUsers                                               --> returns IAM user activity and summary count of users
-  - Get-InactiveIAMUsers -Days 120                                     --> returns users that are inactive for last 120 days (you sets the threshold days)
+  - Get-InactiveIAMUsers -Days 120                                     --> returns users that are inactive for last 120 days (you sets the threshold days as you wish)
   - Get-InactiveIAMUsers -OnlyInactive                                 --> lists inactive users only (switch parameter )
   - Get-InactiveIAMUsers -IncludeSummary                               --> include summary counts of users
 
@@ -80,7 +135,7 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
 
   - Get-AccessKeyAgeReport
   - Get-AccessKeyAgeReport | -OnlyOld
-  -
+  - .......
 
 -4️⃣ AWS Root Account Security Audit Report:
 
@@ -89,43 +144,41 @@ The function is built, debugged and tested on the PowerShell ISE. Stay tuned for
 ------------------------------------------------------------
 
 
--Exporting syntaxes:
+- Exporting syntaxes:  
   "....... |Export-Csv" , "........ |ConvertTo-Html", "......... |ConvertTo-Json", "........ |Export-Clixml"
-
-
+______________________________________________________________
    
 
-##  Prerequisites
+> ## 🛠 Prerequisites
 
 - Windows PowerShell / PowerShell 7
 - AWS PowerShell Tools (`AWS.Tools.IAM`)
 - AWS credentials configured for your AWS Account(`aws configure` or `Set-AWSCredential`)
 
----
+------------------------------------------------------------
 
 
-## ⚠️Note ⚠️ ##
+> ## ⚠️Note 
 
 *This tool is designed to run with IAM roles like "SecurityAudit"
 and should not be executed using Administrator or Root credentials.*
 
 -Your AWS account *MUST* have atleast the minimum required *PERMISSIONS* to run this tool:
 
-  -iam:ListUsers.
+  - iam:ListUsers.
   
-  -iam:ListMFADevices.
+  - iam:ListMFADevices.
   
-  -iam:ListAccessKeys.
+  - iam:ListAccessKeys.
   
-  -iam:GenerateCredentialReport.
+  - iam:GenerateCredentialReport.
 
 
----
 
-##  Installation Methods
+> ##  📥Installation Methods
 
 
-## Option 1 — Install from GitHub (recommended)
+###  Option 1 — Install from GitHub (recommended) 
 
 Run these commands in PowerShell:
 
@@ -141,16 +194,21 @@ PowerShell will also auto-load your MFA-Audit-Module in future sessions.
 
 ---
 
-## Option 2 — Manual Install (without Git)
+### Option 2 — Manual Install (without Git)
 
--Download the repo as ZIP from GitHub and extract it to:
-"Documents\WindowsPowerShell\Modules\MFAAudit"
+- Download the repo as ZIP from GitHub and extract it to:
+  - "Documents\WindowsPowerShell\Modules\MFAAudit"
 
----
+___________________________________________________________________________________________
+
 This is a learning-driven project — feedback, suggestions, and collaboration are welcome.
 ---
+__________________________________________________________________________________
 
-##👤Author
----
-Mohammed Shafeehe
-Cloud / DevOps Engineering Aspirant
+#👤Author
+-------------------------------------------------------------------------------------------
+
+## MOHAMMED SHAFEEHE
+Cloud / DevOps Engineer | Oracle Certified Architect Associate | ECE Graduate
+
+_______________________________________________________________________________________
