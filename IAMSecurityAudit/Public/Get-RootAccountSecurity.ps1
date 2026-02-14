@@ -1,11 +1,9 @@
-﻿
-
-<#
+﻿<#
 .SYNOPSIS
-Audit the AWS root account security status.
+Audit the AWS root account security posture.
 
 .DESCRIPTION
-This cmdlet returns the security audit result and assess the risk level for the AWS root account
+This cmdlet returns the security audit report and assess the risk level for the AWS root account
  (MFA compliance, active Access-Keys, last console login).
 
 The cmdlet returns structured objects that can be filtered, sorted,

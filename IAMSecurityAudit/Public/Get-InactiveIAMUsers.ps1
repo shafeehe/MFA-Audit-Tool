@@ -1,4 +1,5 @@
-﻿<#
+﻿
+<#
 .SYNOPSIS
 Identifies AWS IAM users who have inactive for a specified number of days.
 
