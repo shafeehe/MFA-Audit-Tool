@@ -47,23 +47,31 @@ ________________________________________________________________________________
   - Uses AWS IAM Credential Report.
   ------------------------------------------------------------------------------
 
-3️⃣ Detect Access-Keys that violate AWS Key-Rotation Policies: 
+3️⃣ Access Key Security Audit and identify credentials hygiene: 
 -----------------------------------------------------------------
   -✅Cmdlet: Get-AccessKeyAgeReport
 
 <img width="730" height="49" alt="image" src="https://github.com/user-attachments/assets/b448c3bd-c671-4f33-86b7-b7d9bc5dcad1" />
 
-  
-  - Lists the active Access-Keys of IAM users and identifies which violates the AWS recommended Key-Rotation Policies, thus enforcing security best practices.
-   
-  - Tells us how long since the keys was rotated.
+  - Evaluates AWS IAM access key security posture and identifies credential hygiene risks based on AWS best practices.
 
-  - Uses AWS IAM Credential Report.
+  - What It Checks:
+
+    - Access Keys Older Than 90 Days ( Rotation Policy Violation: identifies which violates the AWS recommended Key-Rotation Policies, thus enforcing security best practices.)
+    - Never-Used Access Keys
+    - Multiple Active Access Keys per User
+    - Console Password + Active Access Key Exposure
+  
+  - Each IAM user is assigned a consolidated RiskLevel:
+
+      - LOW – No detected issues
+      - MEDIUM – Hygiene or exposure concern
+      - HIGH – Rotation policy violation (> threshold)
   ------------------------------------------------------------------------------
 
 4️⃣ AWS Root Account Security Audit Report:
 -------------------------------------------------------
-  -✅Cmdlet: Get-AccessKeyAgeReport
+  -✅Cmdlet: Get-RootAccountSecurity
 
 <img width="877" height="55" alt="image" src="https://github.com/user-attachments/assets/75b074c6-eb88-4c8d-b0fb-a41f1eca5f2e" />
 
@@ -134,8 +142,9 @@ _________________________________________________________________
 -3️⃣ Detect Access-Keys that violate AWS Key-Rotation Policies:
 
   - Get-AccessKeyAgeReport
-  - Get-AccessKeyAgeReport | -OnlyOld
-  - .......
+  - Get-AccessKeyAgeReport | -OnlyRisky
+  - Get-AccessKeyAgeReport | Export-Csv AccessKeyAudit.csv -NoTypeInformation
+
 
 -4️⃣ AWS Root Account Security Audit Report:
 
