@@ -3,11 +3,10 @@
 
 - AWS IAM Security Audit Tool is a professionally structured PowerShell module designed to audit AWS IAM security posture using read-only AWS APIs.
 
-- This is an installable PowerShell module that provides 'cmdlets' to audit IAM users and root users MFA compliance, analyse users-activity and detect inactive users along with credential analysis and collect overall security audit report in your AWS account.This project is actively developed with version control and documentation maintained in GitHub.
+- This is an installable PowerShell module that provides 'cmdlets' to audit IAM users and root users MFA compliance, analyse users-activity and detect inactive users along with credential analysis and collect overall security audit report in your AWS account.This project is actively developed version control and documentation maintained in GitHub.
 
 - This project is part of my Cloud & DevOps learning journey — focused on building real automation tools instead of standalone scripts. The tool is structured as a reusable PowerShell module, similar to how enterprise automation tools are packaged and deployed.
 
-- The function is built, debugged and tested on the PowerShell ISE. Stay tuned for the latest releases and upgrades!
 
 ______________________________________________________________________________________________________
 
